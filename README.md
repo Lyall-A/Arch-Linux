@@ -34,14 +34,14 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * ~~`mmcli` if using modem~~
 * `ping google.com` to verify network connection
 
-## Update system clock (skippable)
-* `timedatectl` to ensure system clock is synchronized
+## Check system clock (skippable)
+* `timedatectl`
 
 ## Partition disks
 * `lsblk` or `fdisk -l` to view all devices
 * `fdisk <disk to partition>` to modify partitions of disk (eg: `fdisk /dev/sda`)
-    * `g` to create new GPT partition table or `o` to create a new MBR partition table (deletes all partitions)
-    * for each partition to be created:
+    * `g` to create new GPT partition table OR `o` to create a new MBR partition table (deletes all partitions)
+    * repeat each partition to be created:
         * `n` to create a new partition
         * default partition number
         * default first sector
@@ -61,11 +61,11 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 ## Format partitions
 * `mkfs.ext4 /dev/root_partition` to create Ext4 file system on root partition
 * `mkswap /dev/swap_partition` to initialise swap
-* `mkfs.fat -F 32 /dev/efi_partition` to format the EFI partition (if created)
+* `mkfs.fat -F 32 /dev/efi_partition` to format the EFI partition (if using GPT layout)
 
 ## Mount file systems
 * `mount /dev/root_partition /mnt` to mount root volume
-* `mount --mkdir /dev/efi_partition /mnt/boot` to mount EFI partition (if created)
+* `mount --mkdir /dev/efi_partition /mnt/boot` to mount EFI partition (if using GPT layout)
 * `swapon /dev/swap_partition` to enable the swap volume
 
 ## Installation and configuration
@@ -102,9 +102,9 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `sudo pacman -S nvidia nvidia-utils nvidia-settings` to install NVIDIA drivers
 * `sudo nano /etc/default/grub` and add `nvidia-drm.modeset=1` to `GRUB_CMDLINE_LINUX_DEFAULT`
 * `sudo grub-mkconfig -o /boot/grub/grub.cfg` to update GRUB configuration
-* `sudo nano /etc/mkinitcpio.conf` and add `nvidia nvidia_modeset nvidia_uvm nvidia_drm` to `MODULES` then remove `kms` from `HOOKS`
+* `sudo nano /etc/mkinitcpio.conf` and add `nvidia nvidia_modeset nvidia_uvm nvidia_drm` to `MODULES` then remove `kms` from `HOOKS` for early loading
 * `sudo mkinitcpio -P` to regenerate initramfs
-* `sudo curl https://raw.githubusercontent.com/Lyall-A/Arch-Linux/nvidia.hook --create-dirs -o /etc/pacman.d/hooks/nvidia.hook` to create Pacman hook that will automatically regenerate initramfs when NVIDIA gets updated, edit file if using other NVIDIA drivers
+* `sudo curl https://raw.githubusercontent.com/Lyall-A/Arch-Linux/main/nvidia.hook --create-dirs -o /etc/pacman.d/hooks/nvidia.hook` to create Pacman hook that will automatically regenerate initramfs when NVIDIA gets updated, edit file if using other NVIDIA drivers
 
 ## Plasma
 * `sudo pacman -S plasma kde-applications`
