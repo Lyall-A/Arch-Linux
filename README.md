@@ -114,6 +114,15 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 ## Yay
 * `sudo pacman -S --needed git base-devel go && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
 
+## AUR/official packages
+* `brave-bin`
+* `vesktop-bin`
+* `spicetify-cli`
+* `spotify`
+* `visual-studio-code-bin`
+* `steam`
+* `multimc-bin`
+
 ## GPU Passthrough (TODO)
 * `sudo pacman -S qemu libvirt virt-manager ovmf dnsmasq`
 * `sudo systemctl enable libvirtd && sudo systemctl start libvirtd`
