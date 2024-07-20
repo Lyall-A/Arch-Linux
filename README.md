@@ -106,29 +106,23 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `sudo mkinitcpio -P` to regenerate initramfs
 * `sudo curl https://raw.githubusercontent.com/Lyall-A/Arch-Linux/main/nvidia.hook --create-dirs -o /etc/pacman.d/hooks/nvidia.hook` to create Pacman hook that will automatically regenerate initramfs when NVIDIA gets updated, edit file if using other NVIDIA drivers
 
-## Plasma
+## Install Plasma
 * `sudo pacman -S plasma kde-applications`
 * `systemctl enable sddm && systemctl start sddm`
 * Set keyboard layout in settings
 
-## Yay
+## Install Yay
 * `sudo pacman -S --needed git base-devel go && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
 
 ## AUR/official packages
-* `brave-bin`
-* `vesktop-bin`
-* `spicetify-cli`
-* `spotify`
-* `visual-studio-code-bin`
-* `steam`
-* `multimc-bin`
+* `carla` JACK plugin host
+* `qpwgraph` Pipewire graph
+* `brave-bin` Brave Browser
+* `vesktop-bin` Vesktop (Discord modified client)
+* `spotify` Spotify
+* `spicetify-cli` Spicetify (Spotify modified client)
+* `visual-studio-code-bin` VS Code
+* `steam` Steam
+* `multimc-bin` MultiMC
 
 ## GPU Passthrough (TODO)
-* `sudo pacman -S qemu libvirt virt-manager ovmf dnsmasq`
-* `sudo systemctl enable libvirtd && sudo systemctl start libvirtd`
-* `sudo nano /etc/default/grub`, add `intel_iommu=on` and `iommu=pt` to `GRUB_CMDLINE_LINUX_DEFAULT`
-* `sudo grub-mkconfig -o /boot/grub/grub.cfg`
-* Reboot
-* `virt-manager`
-* Create VM with UEFI `OVMF_CODE.fd`
-* Install Windows 10
