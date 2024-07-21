@@ -8,7 +8,7 @@ pactl set-default-sink Main
 sleep 2
 
 echo "Starting Carla..."
-carla --no-gui ./.carxp &
+carla ./.carxp &
 sleep 2
 
 echo "Starting qpwgraph..."
