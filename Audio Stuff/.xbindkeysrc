@@ -65,10 +65,10 @@
 #"rxvt"
 #  Control + b:2 + Release
 
-"${HOME}/Git\ Repos/Arch-Linux/Audio\ Stuff/Scripts/master-volume-up.sh"
+"${HOME}/Arch-Linux/Audio\ Stuff/Scripts/master-volume-up.sh"
     Shift + Prior
 
-"${HOME}/Git\ Repos/Arch-Linux/Audio\ Stuff/Scripts/master-volume-down.sh"
+"${HOME}/Arch-Linux/Audio\ Stuff/Scripts/master-volume-down.sh"
     Shift + Next
 
 ##################################

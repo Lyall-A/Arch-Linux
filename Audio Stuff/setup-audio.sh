@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $(dirname "%0")
+cd "$(dirname "$0")"
 
 echo "Creating virtual sink..."
 pactl load-module module-null-sink sink_name=Main
