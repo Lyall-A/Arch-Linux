@@ -8,11 +8,11 @@ pactl set-default-sink Main
 sleep 2
 
 echo "Starting Carla..."
-carla --no-gui ./Main.carxp &
+carla --no-gui ./.carxp &
 sleep 2
 
 echo "Starting qpwgraph..."
-qpwgraph --activated --minimized ./Main.qpwgraph &
+qpwgraph --activated --minimized ./.qpwgraph &
 sleep 2
 
 echo "Starting xbindkeys..."
