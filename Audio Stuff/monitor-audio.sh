@@ -6,7 +6,7 @@ do
     sleep 1
     dump="$(pw-dump)"
     filtered_nodes=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node" and .info.props["node.name"] and .info.props["media.class"] == "Stream/Output/Audio") .id')
-    sink_id=$(echo "$dump" | jq -r --arg name $(pactl info | grep "Default Sink" | awk -F': ' '{print $2}') '.[] | select(.info.props["node.name"] == $name) .id')
+    sink_id=$(echo "$dump" | jq -r --arg name $(pactl info | grep "Default Sink" | awk -F': ' '{print $2}') 'first(.[] | select(.info.props["node.name"] == $name) .id)')
 
     for id in $filtered_nodes
     do
