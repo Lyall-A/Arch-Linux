@@ -17,7 +17,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `loadkeys <layout>` to set keyboard layout temporary (eg: `loadkeys uk`)
 
 ## Verify boot mode (skippable)
-* `cat /sys/firmware/efi/fw_platform_size` to verify boot mode (should be 64)
+* `cat /sys/firmware/efi/fw_platform_size` to verify boot mode
     * `64`: 64-bit UEFI mode
     * `32`: 32-bit UEFI mode
     * `No such file or directory`: booted in BIOS or CSM mode
@@ -43,6 +43,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
     * `g` to create new GPT partition table OR `o` to create a new MBR partition table (deletes all partitions)
     * repeat each partition to be created:
         * `n` to create a new partition
+        * default partition type (primary)
         * default partition number
         * default first sector
         * size/last sector (eg: +1G for 1 GiB. blank to use remainder of disk. `y` to any warnings)
@@ -56,7 +57,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
         * `/` `/dev/root_partition` `Linux root (x86-64)` `Remainder of disk`
     * BIOS with MBR layout:
         * `[SWAP]` `/dev/swap_partition` `swap/82` `At least 4 GiB`
-        * `/` `/dev/root_partiton` `Linux/83` `Remainder of disk`
+        * `/` `/dev/root_partiton` `linux/83` `Remainder of disk`
 
 ## Format partitions
 * `mkfs.ext4 /dev/root_partition` to create Ext4 file system on root partition
