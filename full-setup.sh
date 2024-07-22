@@ -1,4 +1,5 @@
 #!/bin/bash
+# Complete Arch Linux setup script
 
 
 # TODO: i was trying to make a good and configurable script but got lazy, ends at arch-chroot

@@ -1,23 +1,24 @@
 # My audio
 ## (it's slightly more difficult and annoying than Voicemeeter on Windows)
 
-Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks and virtual MIDI.
+Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, virtual MIDI devices and custom bash scripts.
 
-* Carla is being used as a plugin host
-* qpwgraph is being used as a graph that automatically links all my applications
-* Audio monitoring script automatically unlinks applications from default sink if it is also linked to anything else
-* Send macro script is to send the virtual MIDI commands
-* Update MIDI script is to make sure MIDI doesn't get changed from anything other than the macro script
-* xbindkeys is being used to setup keyboard keybinds that send MIDI commands to plugins in Carla (such as volume control)
-* Virtual sinks is mainly just to make things cleaner
-* Virtual MIDI is for my keybinds
+## Stuff
+* `Carla`: used as a plugin host
+* `qpwgraph`: used as a graph and to automatically or manually route my audio sources
+* `monitor-audio.sh`: automatically unlinks audio sources from the default sink if it is also linked to anything else
+* `send-macro`: used to send the virtual MIDI commands, mainly by xbindkeys
+* `update-midi`: used to make sure MIDI is set to the correct value
+* `xbindkeys`: used to setup keyboard keybinds to send MIDI commands using the `send-macro` script
+* `Virtual sinks`: used to make things more arranged and easier
+* `Virtual MIDI`: used to control audio/plugins in Carla
 
 
 ## Macro format
-`<macro name> <save name> <CC> <channel> <change amount> <is toggle (boolean)>[NEW LINE]`
+`<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle>`
 
 ## Save format
-`<macro name> <value>`
+`<save name> <value>`
 
 ## Macro example
 ```
