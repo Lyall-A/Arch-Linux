@@ -6,6 +6,22 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks a
 * Carla is being used as a plugin host
 * qpwgraph is being used as a graph that automatically links all my applications
 * Audio monitoring script automatically unlinks applications from default sink if it is also linked to anything else
+* Send macro script is to send the virtual MIDI commands
+* Update MIDI script is to make sure MIDI doesn't get changed from anything other than the macro script
 * xbindkeys is being used to setup keyboard keybinds that send MIDI commands to plugins in Carla (such as volume control)
 * Virtual sinks is mainly just to make things cleaner
 * Virtual MIDI is for my keybinds
+
+
+## Macro format
+`<macro name> <save name> <CC> <channel> <change amount> <is toggle (boolean)>[NEW LINE]`
+
+## Save format
+`<macro name> <value>`
+
+## Macro example
+```
+volume-up volume 1 15 5 false
+volume-down volume 1 15 -5 false
+toggle-mute mute 2 15 0 true
+```

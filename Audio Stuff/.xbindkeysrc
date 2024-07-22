@@ -1,17 +1,17 @@
 # Master Volume
-"./Scripts/master-volume-up.sh"
+"./send-macro.sh master-volume-up"
     Shift + Prior
-"./Scripts/master-volume-down.sh"
+"./send-macro.sh master-volume-down"
     Shift + Next
 
 # Main Volume
-"./Scripts/main-volume-up.sh"
+"./send-macro.sh main-volume-up"
     Alt + Prior
-"./Scripts/main-volume-down.sh"
+"./send-macro.sh main-volume-down"
     Alt + Next
 
 # Music Volume
-"./Scripts/music-volume-up.sh"
+"./send-macro.sh music-volume-up"
     Alt + Home
-"./Scripts/music-volume-down.sh"
+"./send-macro.sh music-volume-down"
     Alt + End

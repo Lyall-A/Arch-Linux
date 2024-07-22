@@ -25,6 +25,10 @@ echo "Starting audio monitoring script..."
 ./monitor-audio.sh &> ./monitor-audio.log &
 sleep 2
 
+echo "Starting MIDI update script..."
+./update-midi.sh &> ./update-midi.log &
+sleep 2
+
 echo "Starting xbindkeys..."
-xbindkeys --verbose --file ./.xbindkeysrc &> ./xbindkeys.log &
+xbindkeys --file ./.xbindkeysrc &> ./xbindkeys.log &
 sleep 2

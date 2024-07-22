@@ -12,5 +12,5 @@ VALUE_HEX="$(printf "%02x" $VALUE)"
 
 DATA="$CHANNEL_HEX $CC_HEX $VALUE_HEX"
 
-echo "Writing '$DATA' to $MIDI_DEVICE"
+echo "Writing '$DATA' to $MIDI_DEVICE, CC $CC"
 amidi -p $MIDI_DEVICE -S "$DATA"
