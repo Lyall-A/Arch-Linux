@@ -18,6 +18,8 @@ if [ "$found_macro" != "" ]; then
     channel=$(echo "$found_macro" | cut -d " " -f 4)
     change_amount=$(echo "$found_macro" | cut -d " " -f 5)
     is_toggle=$(echo "$found_macro" | cut -d " " -f 6)
+    toggle_low=$(echo "$found_macro" | cut -d " " -f 7) && toggle_low=${toggle_low:-0} && toggle_low=$(( toggle_low > 127 ? 127 : toggle_low < 0 ? 0 : toggle_low ))
+    toggle_high=$(echo "$found_macro" | cut -d " " -f 8) && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
 
     # Find save
     found_save=$(grep "^$save_name\s" "$macro_saves_location")
@@ -27,13 +29,11 @@ if [ "$found_macro" != "" ]; then
     if [ "$dont_update" = "" ]; then
         if [ "$is_toggle" = "true" ]; then
             # Set's value to 0 OR 127
-            new_value=$(( current_value > 0 ? 0 : 127 ))
+            new_value=$(( current_value > toggle_low ? toggle_low : toggle_high ))
         else
             # Updates value, rounds to nearest change_amount
             change_amount_abs=$(( change_amount < 0 ? -change_amount : change_amount ))
-            new_value=$(( current_value + change_amount ))
-            new_value=$(( ((new_value + (change_amount_abs / 2)) / change_amount_abs) * change_amount_abs ))
-            new_value=$(( new_value > 127 ? 127 : new_value < 0 ? 0 : new_value ))
+            new_value=$(( current_value + change_amount )) && new_value=$(( ((new_value + (change_amount_abs / 2)) / change_amount_abs) * change_amount_abs )) && new_value=$(( new_value > 127 ? 127 : new_value < 0 ? 0 : new_value ))
         fi
     else
         # Don't update value
@@ -50,7 +50,7 @@ if [ "$found_macro" != "" ]; then
 
     data="$channel_hex $cc_hex $value_hex"
 
-    echo "Changing '$macro_name' value from $current_value to $new_value"
+    echo "Changing '$macro_name' (CC$cc, Ch$((channel + 1))) value from $current_value to $new_value"
     # Send to MIDI
     amidi -p $midi_device -S "$data"
     

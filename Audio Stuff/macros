@@ -1,11 +1,14 @@
 # Master volume
 master-volume-up master-volume 1 15 2
 master-volume-down master-volume 1 15 -2
+master-mute master-mute 4 15 0 true
 
 # Main volume
 main-volume-up main-volume 2 15 2
 main-volume-down main-volume 2 15 -2
+main-mute main-mute 5 15 0 true
 
 # Music volume
 music-volume-up music-volume 3 15 2
 music-volume-down music-volume 3 15 -2
+music-mute music-mute 6 15 0 true

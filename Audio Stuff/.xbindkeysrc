@@ -1,17 +1,23 @@
-# Master Volume
+# Master
 "./send-macro.sh master-volume-up"
     Shift + Prior
 "./send-macro.sh master-volume-down"
     Shift + Next
-
-# Main Volume
-"./send-macro.sh main-volume-up"
+"./send-macro.sh master-mute"
     Alt + Prior
+
+# Main
+"./send-macro.sh main-volume-up"
+    Control + Prior
 "./send-macro.sh main-volume-down"
+    Control + Next
+"./send-macro.sh main-mute"
     Alt + Next
 
-# Music Volume
+# Music
 "./send-macro.sh music-volume-up"
-    Alt + Home
+    Control + Home
 "./send-macro.sh music-volume-down"
+    Control + End
+"./send-macro.sh music-mute"
     Alt + End

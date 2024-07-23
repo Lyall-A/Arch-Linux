@@ -15,7 +15,7 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 
 
 ## Macro format
-`<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle>`
+`<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
 
 ## Save format
 `<save name> <value>`
