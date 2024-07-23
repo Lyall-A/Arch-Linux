@@ -1,0 +1,7 @@
+[Unit]
+Description=Set NVIDIA settings on boot
+After=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nvidia-settings -l
