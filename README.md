@@ -43,7 +43,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
     * `g` to create new GPT partition table OR `o` to create a new MBR partition table (deletes all partitions)
     * repeat each partition to be created:
         * `n` to create a new partition
-        * default partition type (primary)
+        * default partition type (if using MBR)
         * default partition number
         * default first sector
         * size/last sector (eg: +1G for 1 GiB. blank to use remainder of disk. `y` to any warnings)
