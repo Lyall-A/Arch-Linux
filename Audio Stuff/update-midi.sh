@@ -14,7 +14,7 @@ do
         # Get macro details
         macro_name=$(echo "$line" | cut -d " " -f 1)
         save_name=$(echo "$line" | cut -d " " -f 2)
-        midi_device=$(echo "$found_macro" | cut -d " " -f 3)
+        midi_device=$(echo "$line" | cut -d " " -f 3)
         cc=$(echo "$line" | cut -d " " -f 4)
         channel=$(echo "$line" | cut -d " " -f 5)
 
