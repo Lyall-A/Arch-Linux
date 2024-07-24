@@ -125,10 +125,34 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `bun-bin` Bun
 * `multimc-bin` MultiMC
 
-## GPU Passthrough (TODO)
-* `git clone git@github.com:Lyall-A/GPU-Passthrough.git` Clone my GPU-Passthrough repo
+## GPU Passthrough
+* `git clone git@github.com:Lyall-A/GPU-Passthrough.git && cd GPU-Passthrough`
 * `chmod +x *.sh`
-* `./libvirt_setup.sh`
-* `./install_hooks.sh`
-* `./grub_setup_<platform>.sh`
-* Setup VM in virt manager (TODO)
+* `sudo ./libvirt_setup.sh`
+* `sudo ./install_hooks.sh`
+* `sudo ./grub_setup_<platform>.sh`
+* `sudo cp i2c_i801_blacklist.conf /etc/modprobe.d` Only for me
+* Dump GPU BIOS using GPU-Z on Windows and in a Hex editor and cut off the first few bytes until you get to byte 0x55 (dumping on Linux didn't work for me)
+* Copy GPU BIOS to /var/lib/libvirt/vbios/gpu.rom
+* Setup VM in Virt-Manager
+* Set firmware to UEFI (OVMF)
+* Add all PCI devices related to GPU and edit the XML to add `<rom file='/var/lib/libvirt/vbios/gpu.rom'/>`
+* Add audio and USB controller PCI devices
+* If using a NVIDIA GPU, replace the `features` section in the main XML with
+```xml
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv>
+      <relaxed state="on"/>
+      <vapic state="on"/>
+      <spinlocks state="on" retries="8191"/>
+      <vendor_id state='on' value="123456789123"/>
+    </hyperv>
+    <kvm>
+      <hidden state="on"/>
+    </kvm>
+    <vmport state="off"/>
+    <ioapic driver="kvm"/>
+  </features>
+```
