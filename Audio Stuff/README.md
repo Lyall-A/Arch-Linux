@@ -13,6 +13,12 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `Virtual sinks`: used to make things more arranged and easier
 * `Virtual MIDI`: used to control audio/plugins in Carla
 
+## Dependencies
+* `jq` Parse JSON
+* `xbindkeys` Keyboard binds
+* `carla` Plugin host
+* `qpwgraph` PipeWire graph
+
 
 ## Macro format
 `<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
