@@ -147,7 +147,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
       <relaxed state="on"/>
       <vapic state="on"/>
       <spinlocks state="on" retries="8191"/>
-      <vendor_id state='on' value="123456789123"/>
+      <vendor_id state="on" value="123456789123"/>
     </hyperv>
     <kvm>
       <hidden state="on"/>
