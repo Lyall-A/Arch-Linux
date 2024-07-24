@@ -21,7 +21,7 @@ sleep 2
 # Start Carla (plugin host)
 echo "Starting Carla..."
 carla ./.carxp &> ./Carla.log &
-sleep 5
+sleep 2
 
 # Start qpwgraph (for routing and graph)
 echo "Starting qpwgraph..."
