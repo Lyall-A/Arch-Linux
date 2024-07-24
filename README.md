@@ -126,3 +126,9 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `multimc-bin` MultiMC
 
 ## GPU Passthrough (TODO)
+* `git clone git@github.com:Lyall-A/GPU-Passthrough.git` Clone my GPU-Passthrough repo
+* `chmod +x *.sh`
+* `./libvirt_setup.sh`
+* `./install_hooks.sh`
+* `./grub_setup_<platform>.sh`
+* Setup VM in virt manager (TODO)
