@@ -18,7 +18,7 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `xbindkeys` Keyboard binds
 * `carla` Plugin host
 * `qpwgraph` PipeWire graph
-
+* `pipewire-jack` For Carla
 
 ## Macro format
 `<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
