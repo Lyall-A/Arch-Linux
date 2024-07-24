@@ -1,7 +1,6 @@
 #!/bin/bash
 # Looks through each macro every interval and updates MIDI to make sure it is synced up
 
-midi_device="hw:0,0" # Get with 'amidi -l'
 default_value="127" # Default value if no save was found
 macros_location="$(dirname "$0")/macros" # Macros location
 macro_saves_location="$(dirname "$0")/macro-saves" # Macro saves location
@@ -15,8 +14,9 @@ do
         # Get macro details
         macro_name=$(echo "$line" | cut -d " " -f 1)
         save_name=$(echo "$line" | cut -d " " -f 2)
-        cc=$(echo "$line" | cut -d " " -f 3)
-        channel=$(echo "$line" | cut -d " " -f 4)
+        midi_device=$(echo "$found_macro" | cut -d " " -f 3)
+        cc=$(echo "$line" | cut -d " " -f 4)
+        channel=$(echo "$line" | cut -d " " -f 5)
 
         # Find save
         found_save=$(grep "^$save_name\s" "$macro_saves_location")

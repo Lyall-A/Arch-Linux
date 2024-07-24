@@ -1,0 +1,23 @@
+# Master
+"./send-macro.sh master-volume-up"
+    Shift + KP_Prior
+"./send-macro.sh master-volume-down"
+    Shift + KP_Next
+"./send-macro.sh master-mute"
+    Alt + KP_Prior
+
+# Main
+"./send-macro.sh main-volume-up"
+    Control + KP_Prior
+"./send-macro.sh main-volume-down"
+    Control + KP_Next
+"./send-macro.sh main-mute"
+    Alt + KP_Next
+
+# Music
+"./send-macro.sh music-volume-up"
+    Control + KP_Up
+"./send-macro.sh music-volume-down"
+    Control + KP_Down
+"./send-macro.sh music-mute"
+    Alt + KP_Down

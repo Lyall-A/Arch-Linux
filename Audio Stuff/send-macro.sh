@@ -4,7 +4,6 @@
 macro_name=$1
 dont_update=$2
 
-midi_device="hw:0,0" # Get with 'amidi -l'
 default_value="127" # Default value if no save was found
 macros_location="$(dirname "$0")/macros" # Macros location
 macro_saves_location="$(dirname "$0")/macro-saves" # Macro saves location
@@ -14,12 +13,13 @@ found_macro=$(grep "^$macro_name\s" "$macros_location")
 if [ "$found_macro" != "" ]; then
     # Get macro details
     save_name=$(echo "$found_macro" | cut -d " " -f 2)
-    cc=$(echo "$found_macro" | cut -d " " -f 3)
-    channel=$(echo "$found_macro" | cut -d " " -f 4)
-    change_amount=$(echo "$found_macro" | cut -d " " -f 5)
-    is_toggle=$(echo "$found_macro" | cut -d " " -f 6)
-    toggle_low=$(echo "$found_macro" | cut -d " " -f 7) && toggle_low=${toggle_low:-0} && toggle_low=$(( toggle_low > 127 ? 127 : toggle_low < 0 ? 0 : toggle_low ))
-    toggle_high=$(echo "$found_macro" | cut -d " " -f 8) && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
+    midi_device=$(echo "$found_macro" | cut -d " " -f 3)
+    cc=$(echo "$found_macro" | cut -d " " -f 4)
+    channel=$(echo "$found_macro" | cut -d " " -f 5)
+    change_amount=$(echo "$found_macro" | cut -d " " -f 6)
+    is_toggle=$(echo "$found_macro" | cut -d " " -f 7)
+    toggle_low=$(echo "$found_macro" | cut -d " " -f 8) && toggle_low=${toggle_low:-0} && toggle_low=$(( toggle_low > 127 ? 127 : toggle_low < 0 ? 0 : toggle_low ))
+    toggle_high=$(echo "$found_macro" | cut -d " " -f 9) && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
 
     # Find save
     found_save=$(grep "^$save_name\s" "$macro_saves_location")

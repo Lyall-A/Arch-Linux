@@ -19,16 +19,18 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `carla` Plugin host
 * `qpwgraph` PipeWire graph
 * `pipewire-jack` For Carla
+* `alsa-utils` For MIDI
+* `lsp-plugins` `calf` Plugins for Carla
 
 ## Macro format
-`<macro name> <save name> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
+`<macro name> <save name> <MIDI device> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
 
 ## Save format
 `<save name> <value>`
 
 ## Macro example
 ```
-volume-up volume 1 15 5 false
-volume-down volume 1 15 -5 false
-toggle-mute mute 2 15 0 true
+volume-up volume hw:0,0 1 15 5
+volume-down volume hw:0,0 1 15 -5
+toggle-mute mute hw:0,0 2 15 0 true
 ```

@@ -10,10 +10,6 @@
   <UIBridgesTimeout>4000</UIBridgesTimeout>
  </EngineSettings>
 
- <Transport>
-  <BeatsPerMinute>120</BeatsPerMinute>
- </Transport>
-
  <!-- LSP Parametric Equalizer x16 Stereo -->
  <Plugin>
   <Info>
@@ -1374,7 +1370,7 @@
 
   <Data>
    <Active>Yes</Active>
-   <Volume>0.1564461</Volume>
+   <Volume>0.1471078</Volume>
    <ControlChannel>1</ControlChannel>
    <Options>0x4</Options>
 
@@ -1620,12 +1616,52 @@
 
  <ExternalPatchbay>
   <Connection>
-   <Source>Music MUTE:Audio Output 1</Source>
-   <Target>Master Volume:Audio Input 1</Target>
+   <Source>spotify:output_FL</Source>
+   <Target>Music Audio/Sink sink:playback_FL</Target>
   </Connection>
   <Connection>
-   <Source>Music MUTE:Audio Output 2</Source>
-   <Target>Master Volume:Audio Input 2</Target>
+   <Source>spotify:output_FR</Source>
+   <Target>Music Audio/Sink sink:playback_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>LSP Parametric Equalizer x16 Stereo:Output L</Source>
+   <Target>Music Volume:Audio Input 1</Target>
+  </Connection>
+  <Connection>
+   <Source>LSP Parametric Equalizer x16 Stereo:Output R</Source>
+   <Target>Music Volume:Audio Input 2</Target>
+  </Connection>
+  <Connection>
+   <Source>Master Volume:Audio Output 1</Source>
+   <Target>Master MUTE:Audio Input 1</Target>
+  </Connection>
+  <Connection>
+   <Source>Master Volume:Audio Output 2</Source>
+   <Target>Master MUTE:Audio Input 2</Target>
+  </Connection>
+  <Connection>
+   <Source>Master Volume Device 1:Audio Output 1</Source>
+   <Target>Family 17h/19h HD Audio Controller Headphones:playback_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>Master Volume Device 1:Audio Output 2</Source>
+   <Target>Family 17h/19h HD Audio Controller Headphones:playback_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>Main Volume:Audio Output 1</Source>
+   <Target>Main MUTE:Audio Input 1</Target>
+  </Connection>
+  <Connection>
+   <Source>Main Volume:Audio Output 2</Source>
+   <Target>Main MUTE:Audio Input 2</Target>
+  </Connection>
+  <Connection>
+   <Source>Music Volume:Audio Output 1</Source>
+   <Target>Music MUTE:Audio Input 1</Target>
+  </Connection>
+  <Connection>
+   <Source>Music Volume:Audio Output 2</Source>
+   <Target>Music MUTE:Audio Input 2</Target>
   </Connection>
   <Connection>
    <Source>Master MUTE:Audio Output 1</Source>
@@ -1644,30 +1680,6 @@
    <Target>Master Volume Device 2:Audio Input 2</Target>
   </Connection>
   <Connection>
-   <Source>Master Volume Device 1:Audio Output 1</Source>
-   <Target>Built-in Audio Analog Stereo:playback_FL</Target>
-  </Connection>
-  <Connection>
-   <Source>Master Volume Device 1:Audio Output 2</Source>
-   <Target>Built-in Audio Analog Stereo:playback_FR</Target>
-  </Connection>
-  <Connection>
-   <Source>Music Volume:Audio Output 1</Source>
-   <Target>Music MUTE:Audio Input 1</Target>
-  </Connection>
-  <Connection>
-   <Source>Music Volume:Audio Output 2</Source>
-   <Target>Music MUTE:Audio Input 2</Target>
-  </Connection>
-  <Connection>
-   <Source>spotify:output_FL</Source>
-   <Target>Music Audio/Sink sink:playback_FL</Target>
-  </Connection>
-  <Connection>
-   <Source>spotify:output_FR</Source>
-   <Target>Music Audio/Sink sink:playback_FR</Target>
-  </Connection>
-  <Connection>
    <Source>Main MUTE:Audio Output 1</Source>
    <Target>Master Volume:Audio Input 1</Target>
   </Connection>
@@ -1676,36 +1688,12 @@
    <Target>Master Volume:Audio Input 2</Target>
   </Connection>
   <Connection>
-   <Source>LSP Parametric Equalizer x16 Stereo:Output L</Source>
-   <Target>Music Volume:Audio Input 1</Target>
+   <Source>Music MUTE:Audio Output 1</Source>
+   <Target>Master Volume:Audio Input 1</Target>
   </Connection>
   <Connection>
-   <Source>LSP Parametric Equalizer x16 Stereo:Output R</Source>
-   <Target>Music Volume:Audio Input 2</Target>
-  </Connection>
-  <Connection>
-   <Source>Master Volume Device 2:Audio Output 1</Source>
-   <Target>Rift S Analog Stereo:playback_FL</Target>
-  </Connection>
-  <Connection>
-   <Source>Master Volume Device 2:Audio Output 2</Source>
-   <Target>Rift S Analog Stereo:playback_FR</Target>
-  </Connection>
-  <Connection>
-   <Source>Main Volume:Audio Output 1</Source>
-   <Target>Main MUTE:Audio Input 1</Target>
-  </Connection>
-  <Connection>
-   <Source>Main Volume:Audio Output 2</Source>
-   <Target>Main MUTE:Audio Input 2</Target>
-  </Connection>
-  <Connection>
-   <Source>Master Volume:Audio Output 1</Source>
-   <Target>Master MUTE:Audio Input 1</Target>
-  </Connection>
-  <Connection>
-   <Source>Master Volume:Audio Output 2</Source>
-   <Target>Master MUTE:Audio Input 2</Target>
+   <Source>Music MUTE:Audio Output 2</Source>
+   <Target>Master Volume:Audio Input 2</Target>
   </Connection>
   <Connection>
    <Source>Main Audio/Sink sink:monitor_FL</Source>
@@ -1723,39 +1711,9 @@
    <Source>Music Audio/Sink sink:monitor_FR</Source>
    <Target>LSP Parametric Equalizer x16 Stereo:Input R</Target>
   </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Master Volume:events-in</Target>
-  </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Music Volume:events-in</Target>
-  </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Main Volume:events-in</Target>
-  </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Music MUTE:events-in</Target>
-  </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Main MUTE:events-in</Target>
-  </Connection>
-  <Connection>
-   <Source>Midi-Bridge:Virtual MIDI Card 1:(capture_0) VirMIDI 0-0</Source>
-   <Target>Master MUTE:events-in</Target>
-  </Connection>
   <Positions>
-   <Position x1="1052" y1="1041">
-    <Name>Main Audio/Sink sink</Name>
-   </Position>
-   <Position x1="979" y1="906">
-    <Name>Music Audio/Sink sink</Name>
-   </Position>
-   <Position x1="987" y1="772" x2="1327" y2="1824">
-    <Name>Midi-Bridge</Name>
+   <Position x1="1331" y1="1626">
+    <Name>spotify</Name>
    </Position>
    <Position x1="1152" y1="903" pluginId="0">
     <Name>LSP Parametric Equalizer x16 Stereo</Name>
@@ -1783,6 +1741,15 @@
    </Position>
    <Position x1="1683" y1="873" pluginId="8">
     <Name>Music MUTE</Name>
+   </Position>
+   <Position x1="1052" y1="1041">
+    <Name>Main Audio/Sink sink</Name>
+   </Position>
+   <Position x1="979" y1="906">
+    <Name>Music Audio/Sink sink</Name>
+   </Position>
+   <Position x1="987" y1="772" x2="1327" y2="1824">
+    <Name>Midi-Bridge</Name>
    </Position>
   </Positions>
  </ExternalPatchbay>
