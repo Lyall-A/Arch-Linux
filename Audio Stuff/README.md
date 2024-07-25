@@ -34,3 +34,7 @@ volume-up volume hw:0,0 1 15 5
 volume-down volume hw:0,0 1 15 -5
 toggle-mute mute hw:0,0 2 15 0 true
 ```
+
+## Routing
+![Routing in Carla](./carla-example-config.png)
+I have all my plugins routed using Carla and all external stuff like Spotify, outputs and MIDI routed through qpwgraph to make sure they don't get removed
