@@ -12,11 +12,11 @@ https://wiki.archlinux.org/title/NVIDIA
 https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 
 
-## Set keyboard layout for current console (optional)
+## Set keyboard layout for current console
 * `localectl list-keymaps` to view keymaps
 * `loadkeys <layout>` to set keyboard layout temporary (eg: `loadkeys uk`)
 
-## Verify boot mode (optional)
+## Verify boot mode
 * `cat /sys/firmware/efi/fw_platform_size` to verify boot mode
     * `64`: 64-bit UEFI mode
     * `32`: 32-bit UEFI mode
