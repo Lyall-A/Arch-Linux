@@ -18,7 +18,7 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `xbindkeys` Keyboard binds
 * `carla` Plugin host
 * `qpwgraph` PipeWire graph
-* `pipewire-jack` For Carla
+* `pipewire-jack` `pipewire-pulse` `pipewire-alsa` To make everything work more smoothly
 * `alsa-utils` For MIDI
 * `lsp-plugins` `calf` Plugins for Carla
 
