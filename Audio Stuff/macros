@@ -12,3 +12,8 @@ main-mute main-mute hw:0,0 5 15 0 true
 music-volume-up music-volume hw:0,0 3 15 2
 music-volume-down music-volume hw:0,0 3 15 -2
 music-mute music-mute hw:0,0 6 15 0 true
+
+# Video volume
+video-volume-up video-volume hw:0,0 7 15 2
+video-volume-down video-volume hw:0,0 7 15 -2
+video-mute video-mute hw:0,0 8 15 0 true

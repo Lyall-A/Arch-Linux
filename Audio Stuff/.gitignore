@@ -1,5 +1,6 @@
 Saves
 macro-saves
+.xbindkeysrc
 *.carxp
 *.qpwgraph
 *.log

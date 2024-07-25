@@ -15,6 +15,8 @@ if [ -f "/etc/modules-load.d/modules-load-virtual-midi.conf" ]; then echo "Virtu
 echo "Creating virtual sinks..."
 echo "Main sink: $(pactl load-module module-null-sink sink_name=Main)"
 echo "Music sink: $(pactl load-module module-null-sink sink_name=Music)"
+echo "Video sink: $(pactl load-module module-null-sink sink_name=Video)"
+echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"
 pactl set-default-sink Main
 sleep 2
 

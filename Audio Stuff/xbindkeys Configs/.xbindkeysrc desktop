@@ -1,31 +1,31 @@
 # Master
 "./send-macro.sh master-volume-up"
-    Shift + KP_Prior
+    Shift + Prior
 "./send-macro.sh master-volume-down"
-    Shift + KP_Next
+    Shift + Next
 "./send-macro.sh master-mute"
-    Alt + KP_Prior
+    Alt + Prior
 
 # Main
 "./send-macro.sh main-volume-up"
-    Control + KP_Prior
+    Control + Prior
 "./send-macro.sh main-volume-down"
-    Control + KP_Next
+    Control + Next
 "./send-macro.sh main-mute"
-    Alt + KP_Next
+    Alt + Next
 
 # Music
 "./send-macro.sh music-volume-up"
-    Control + KP_Up
+    Control + Home
 "./send-macro.sh music-volume-down"
-    Control + KP_Down
+    Control + End
 "./send-macro.sh music-mute"
-    Alt + KP_Down
+    Alt + End
 
 # Video
 "./send-macro.sh video-volume-up"
-    Control + KP_Home
+    Control + Insert
 "./send-macro.sh video-volume-down"
-    Control + KP_End
+    Control + Delete
 "./send-macro.sh video-mute"
-    Alt + KP_End
+    Alt + Delete

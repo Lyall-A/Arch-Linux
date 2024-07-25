@@ -21,3 +21,11 @@
     Control + KP_Down
 "./send-macro.sh music-mute"
     Alt + KP_Down
+
+# Video
+"./send-macro.sh video-volume-up"
+    Control + KP_Home
+"./send-macro.sh video-volume-down"
+    Control + KP_End
+"./send-macro.sh video-mute"
+    Alt + KP_End
