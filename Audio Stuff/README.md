@@ -38,3 +38,7 @@ toggle-mute mute hw:0,0 2 15 0 true
 ## Routing
 ![Routing in Carla](./carla-example-config.png)
 I have all my plugins routed using Carla and all external stuff like Spotify, outputs and MIDI routed through qpwgraph to make sure they don't get removed
+
+## TODO
+* Replace qpwgraph with custom script that routes applications depending on there name, supporting RegEx
+* Update monitor-audio script to use pw-dump with monitoring arg instead of interval
