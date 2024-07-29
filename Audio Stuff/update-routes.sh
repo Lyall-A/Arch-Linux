@@ -9,7 +9,7 @@ while true; do
     # Dump PipeWire
     dump="$(pw-dump)"
     # Get all node ID's
-    filtered_nodes_ids=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node" and .info.props["node.name"] and .info.props["media.class"] == "Stream/Output/Audio") .id')
+    filtered_nodes_ids=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") .id')
 
     # Loop through each node
     for id in $filtered_nodes_ids; do
@@ -47,7 +47,8 @@ while true; do
 
                 if [ "$route_to_node_id" != "" ]; then
                     # Link
-                    pw-link $id $route_to_node_id &> /dev/null
+                    pw-link $id $route_to_node_id &> /dev/null &
+                    # pw-link $id $route_to_node_id &
                 fi
             fi
         done
