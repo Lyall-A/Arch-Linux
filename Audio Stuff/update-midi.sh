@@ -6,26 +6,25 @@ macros_location="$(dirname "$0")/macros" # Macros location
 macro_saves_location="$(dirname "$0")/macro-saves" # Macro saves location
 interval=5 # How often to update
 
-while true
-do
+while true; do
     sleep $interval
     # Loop through each macro
     grep -vE "^(\s*|#.*)$" "$macros_location" | while read line; do
         # Get macro details
-        macro_name=$(echo "$line" | cut -d " " -f 1)
-        save_name=$(echo "$line" | cut -d " " -f 2)
-        midi_device=$(echo "$line" | cut -d " " -f 3)
-        cc=$(echo "$line" | cut -d " " -f 4)
-        channel=$(echo "$line" | cut -d " " -f 5)
+        macro_name=$(echo "$line" | awk -F" : " '{print $1}')
+        save_name=$(echo "$line" | awk -F" : " '{print $2}')
+        midi_device=$(echo "$line" | awk -F" : " '{print $3}')
+        cc=$(echo "$line" | awk -F" : " '{print $4}')
+        channel=$(echo "$line" | awk -F" : " '{print $5}')
 
         # Find save
         found_save=$(grep "^$save_name\s" "$macro_saves_location")
 
         # Get value from save, or use default value
-        if [ "$found_save" != "" ]; then value=$(echo "$found_save" | cut -d " " -f 2); else value=$default_value; fi
+        if [ "$found_save" != "" ]; then value=$(echo "$found_save" | awk -F" : " '{print $2}'); else value=$default_value; fi
 
         # Update save
-        updated_save="$save_name $value"
+        updated_save="$save_name : $value"
 
         # Change to hex for MIDI
         channel_hex="$(printf "b%x" $channel)"

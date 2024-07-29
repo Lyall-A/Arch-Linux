@@ -12,20 +12,20 @@ macro_saves_location="$(dirname "$0")/macro-saves" # Macro saves location
 found_macro=$(grep "^$macro_name\s" "$macros_location")
 if [ "$found_macro" != "" ]; then
     # Get macro details
-    save_name=$(echo "$found_macro" | cut -d " " -f 2)
-    midi_device=$(echo "$found_macro" | cut -d " " -f 3)
-    cc=$(echo "$found_macro" | cut -d " " -f 4)
-    channel=$(echo "$found_macro" | cut -d " " -f 5)
-    change_amount=$(echo "$found_macro" | cut -d " " -f 6)
-    is_toggle=$(echo "$found_macro" | cut -d " " -f 7)
-    toggle_low=$(echo "$found_macro" | cut -d " " -f 8) && toggle_low=${toggle_low:-0} && toggle_low=$(( toggle_low > 127 ? 127 : toggle_low < 0 ? 0 : toggle_low ))
-    toggle_high=$(echo "$found_macro" | cut -d " " -f 9) && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
+    save_name=$(echo "$found_macro" | awk -F" : " '{print $2}')
+    midi_device=$(echo "$found_macro" | awk -F" : " '{print $3}')
+    cc=$(echo "$found_macro" | awk -F" : " '{print $4}')
+    channel=$(echo "$found_macro" | awk -F" : " '{print $5}')
+    change_amount=$(echo "$found_macro" | awk -F" : " '{print $6}')
+    is_toggle=$(echo "$found_macro" | awk -F" : " '{print $7}')
+    toggle_low=$(echo "$found_macro" | awk -F" : " '{print $8}') && toggle_low=${toggle_low:-0} && toggle_low=$(( toggle_low > 127 ? 127 : toggle_low < 0 ? 0 : toggle_low ))
+    toggle_high=$(echo "$found_macro" | awk -F" : " '{print $9}') && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
 
     # Find save
     found_save=$(grep "^$save_name\s" "$macro_saves_location")
 
     # Get value from save, or use default value
-    if [ "$found_save" != "" ]; then current_value=$(echo "$found_save" | cut -d " " -f 2); else current_value=$default_value; fi
+    if [ "$found_save" != "" ]; then current_value=$(echo "$found_save" | awk -F" : " '{print $2}'); else current_value=$default_value; fi
     if [ "$dont_update" = "" ]; then
         if [ "$is_toggle" = "true" ]; then
             # Set's value to 0 OR 127
@@ -41,7 +41,7 @@ if [ "$found_macro" != "" ]; then
     fi
 
     # Update save
-    updated_save="$save_name $new_value"
+    updated_save="$save_name : $new_value"
 
     # Change to hex for MIDI
     channel_hex="$(printf "b%x" $channel)"

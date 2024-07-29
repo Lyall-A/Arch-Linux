@@ -27,12 +27,17 @@ sleep 2
 
 # Start qpwgraph (for routing and graph)
 echo "Starting qpwgraph..."
-qpwgraph --activated --minimized ./.qpwgraph &> ./qpwgraph.log &
+qpwgraph --minimized ./.qpwgraph &> ./qpwgraph.log &
 sleep 2
 
 # Start audio monitoring script (monitors for new nodes)
 echo "Starting audio monitoring script..."
 ./monitor-audio.sh &> ./monitor-audio.log &
+sleep 2
+
+# Start update routes script (for routing)
+echo "Starting routes update script..."
+./update-routes.sh &> ./update-routes.log &
 sleep 2
 
 # Start MIDI update script (makes sure MIDI doesn't get changed)

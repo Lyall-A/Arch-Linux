@@ -23,10 +23,13 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `lsp-plugins` `calf` Plugins for Carla
 
 ## Macro format
-`<macro name> <save name> <MIDI device> <MIDI CC> <channel (0-15)> <change amount> <is toggle> <toggle low> <toggle high>`
+`<macro name> : <save name> : <MIDI device> : <MIDI CC> : <channel (0-15)> : <change amount> : <is toggle> : <toggle low> : <toggle high>`
 
 ## Save format
-`<save name> <value>`
+`<save name> : <value>`
+
+## Routes format
+`<string/regex to route from> : <string/regex to route to> : <from type (1 = node name, 2 = application name, 3 = binary name)> : <to type (1 = node name, 2 = application name, 3 = binary name)>`
 
 ## Macro example
 ```
@@ -40,5 +43,4 @@ toggle-mute mute hw:0,0 2 15 0 true
 I have all my plugins routed using Carla and all external stuff like Spotify, outputs and MIDI routed through qpwgraph to make sure they don't get removed
 
 ## TODO
-* Replace qpwgraph with custom script that routes applications depending on there name, supporting RegEx
-* Update monitor-audio script to use pw-dump with monitoring arg instead of interval
+* Create a custom script that routes applications depending on there name, supporting RegEx
