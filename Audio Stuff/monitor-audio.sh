@@ -21,12 +21,12 @@ while true; do
         # echo "Node ID: ${id}, linked to default sink: ${linked_to_sink}, linked to other: ${linked_to_other}"
 
         # Unlink from default sink if linked to anything else
-        if [[ $linked_to_sink == true && $linked_to_other == true ]]; then
+        if [[ $linked_to_sink = true && $linked_to_other = true ]]; then
             echo "Unlinking $id from default sink"
             pw-link -d $id $sink_id
         else
             # Link to default sink if not linked to anything else
-            if [[ $linked_to_sink == false && $linked_to_other == false ]]; then
+            if [[ $linked_to_sink = false && $linked_to_other = false ]]; then
                 echo "Linking $id to default sink"
                 pw-link $id $sink_id
             fi

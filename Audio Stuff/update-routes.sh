@@ -27,21 +27,25 @@ while true; do
             route_from_type=$(echo "$line" | awk -F" : " '{print $3}')
             route_to_type=$(echo "$line" | awk -F" : " '{print $4}')
 
-            if [[( $route_from == $node_name && $route_from_type == 1 ) || ( $route_from == $application_name && $route_from_type == 2 ) || ( $route_from == $application_process_binary && $route_from_type == 3 ) ]]; then
+            # Defaults
+            if [ "$route_from_type" = "" ]; then route_from_type=1; fi
+            if [ "$route_to_type" = "" ]; then route_to_type=1; fi
+
+            if [[( $route_from = $node_name && $route_from_type = 1 ) || ( $route_from = $application_name && $route_from_type = 2 ) || ( $route_from = $application_process_binary && $route_from_type = 3 ) ]]; then
                 # Node matches route, get route to ID
-                if [ $route_to_type == 1 ]; then
+                if [ "$route_to_type" = 1 ]; then
                     route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["node.name"] == $route_to) .id)')
                 else
-                if [ $route_to_type == 2 ]; then
+                if [ "$route_to_type" = 2 ]; then
                     route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["application.name"] == $route_to) .id)')
                 else
-                if [ $route_to_type == 3 ]; then
+                if [ "$route_to_type" = 3 ]; then
                     route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["application.process.binary"] == $route_to) .id)')
                 fi
                 fi
                 fi
 
-                if [ $route_to_node_id != "" ]; then
+                if [ "$route_to_node_id" != "" ]; then
                     # Link
                     pw-link $id $route_to_node_id &> /dev/null
                 fi

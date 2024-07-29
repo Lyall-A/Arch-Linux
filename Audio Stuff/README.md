@@ -22,20 +22,25 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `alsa-utils` For MIDI
 * `lsp-plugins` `calf` Plugins for Carla
 
-## Macro format
+## Macros format
 `<macro name> : <save name> : <MIDI device> : <MIDI CC> : <channel (0-15)> : <change amount> : <is toggle> : <toggle low> : <toggle high>`
 
-## Save format
+## Saves format
 `<save name> : <value>`
 
 ## Routes format
-`<string/regex to route from> : <string/regex to route to> : <from type (1 = node name, 2 = application name, 3 = binary name)> : <to type (1 = node name, 2 = application name, 3 = binary name)>`
+`<string/regex to route from> : <string/regex to route to> : <from type (1 = node name, 2 = application name, 3 = binary name, defaults to 1)> : <to type (1 = node name, 2 = application name, 3 = binary name, defaults to 1)>`
 
-## Macro example
+## Macros example
 ```
-volume-up volume hw:0,0 1 15 5
-volume-down volume hw:0,0 1 15 -5
-toggle-mute mute hw:0,0 2 15 0 true
+volume-up : volume : hw:0,0 : 1 : 15 : 5
+volume-down : volume : hw:0,0 : 1 : 15 : -5
+toggle-mute : mute : hw:0,0 : 2 : 15 : 0 : true
+```
+## Routes example
+```
+spotify : Music
+Brave : Video
 ```
 
 ## Routing

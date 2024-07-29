@@ -27,7 +27,7 @@ sleep 2
 
 # Start qpwgraph (for routing and graph)
 echo "Starting qpwgraph..."
-qpwgraph --minimized ./.qpwgraph &> ./qpwgraph.log &
+qpwgraph --minimized --deactivated --nonexclusive ./.qpwgraph &> ./qpwgraph.log &
 sleep 2
 
 # Start audio monitoring script (monitors for new nodes)
