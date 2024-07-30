@@ -48,4 +48,4 @@ Brave : Video
 I have all my plugins routed using Carla and all external stuff like Spotify, outputs and MIDI routed through qpwgraph to make sure they don't get removed
 
 ## TODO
-* Create a custom script that routes applications depending on there name, supporting RegEx
+* ~~Create a custom script that routes applications depending on there name, supporting RegEx~~ (no RegEx support though, don't think its necessary)

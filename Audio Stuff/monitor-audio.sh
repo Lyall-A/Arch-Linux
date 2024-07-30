@@ -1,7 +1,7 @@
 #!/bin/bash
 # Monitors for new audio sources and changes the route to default sink depending on if it is linked to anything else
 
-interval=1 # How often to monitor
+interval=0 # How often to monitor
 
 while true; do
     sleep $interval

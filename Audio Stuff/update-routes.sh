@@ -2,55 +2,61 @@
 # Routes audio sources to correct links
 
 routes_location="$(dirname "$0")/routes" # Routes location
-interval=1 # How often to monitor
+interval=0 # How often to monitor
 
 while true; do
     sleep $interval
     # Dump PipeWire
     dump="$(pw-dump)"
-    # Get all node ID's
-    filtered_nodes_ids=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") .id')
+    # Get all nodes
+    nodes=$(echo "$dump" | jq -c '.[] | select(.type == "PipeWire:Interface:Node")')
+    
+    # Read routes
+    routes=$(grep -vE "^(\s*|#.*)$" "$routes_location")
+
+    declare -A node_name_map
+    declare -A application_name_map
+    declare -A application_process_binary_map
 
     # Loop through each node
-    for id in $filtered_nodes_ids; do
-        # Get node details
-        node=$(echo "$dump" | jq -r --arg id "$id" '.[] | select(.id == ($id | tonumber))')
-        node_name=$(echo "$node" | jq -r '.info.props["node.name"]') # Type 1
-        application_name=$(echo "$node" | jq -r '.info.props["application.name"]') # Type 2
-        application_process_binary=$(echo "$node" | jq -r '.info.props["application.process.binary"]') # Type 3
-        
-        # Loop through each route
-        grep -vE "^(\s*|#.*)$" "$routes_location" | while read line; do
-            # Get route details
-            route_from=$(echo "$line" | awk -F" : " '{print $1}')
-            route_to=$(echo "$line" | awk -F" : " '{print $2}')
-            route_from_type=$(echo "$line" | awk -F" : " '{print $3}')
-            route_to_type=$(echo "$line" | awk -F" : " '{print $4}')
+    while IFS= read -r node; do
+        id=$(echo "$node" | jq -r '.id')
+        node_name=$(echo "$node" | jq -r '.info.props["node.name"]')
+        application_name=$(echo "$node" | jq -r '.info.props["application.name"]')
+        application_process_binary=$(echo "$node" | jq -r '.info.props["application.process.binary"]')
 
-            # Defaults
-            if [ "$route_from_type" = "" ]; then route_from_type=1; fi
-            if [ "$route_to_type" = "" ]; then route_to_type=1; fi
+        node_name_map["$node_name"]=$id
+        application_name_map["$application_name"]=$id
+        application_process_binary_map["$application_process_binary"]=$id
+    done <<< "$nodes"
 
-            if [[( $route_from = $node_name && $route_from_type = 1 ) || ( $route_from = $application_name && $route_from_type = 2 ) || ( $route_from = $application_process_binary && $route_from_type = 3 ) ]]; then
-                # Node matches route, get route to ID
-                if [ "$route_to_type" = 1 ]; then
-                    route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["node.name"] == $route_to) .id)')
-                else
-                if [ "$route_to_type" = 2 ]; then
-                    route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["application.name"] == $route_to) .id)')
-                else
-                if [ "$route_to_type" = 3 ]; then
-                    route_to_node_id=$(echo "$dump" | jq -r  --arg route_to "$route_to" 'first(.[] | select(.type == "PipeWire:Interface:Node" and .info.props["application.process.binary"] == $route_to) .id)')
-                fi
-                fi
-                fi
+    # Loop through each route
+    while IFS= read -r line; do
+        route_from=$(echo "$line" | awk -F" : " '{print $1}')
+        route_to=$(echo "$line" | awk -F" : " '{print $2}')
+        route_from_type=$(echo "$line" | awk -F" : " '{print $3}')
+        route_to_type=$(echo "$line" | awk -F" : " '{print $4}')
 
-                if [ "$route_to_node_id" != "" ]; then
-                    # Link
-                    pw-link $id $route_to_node_id &> /dev/null &
-                    # pw-link $id $route_to_node_id &
-                fi
-            fi
-        done
-    done
+        # Defaults
+        route_from_type=${route_from_type:-1}
+        route_to_type=${route_to_type:-1}
+
+        case $route_from_type in
+            1) from_id=${node_name_map["$route_from"]} ;;
+            2) from_id=${application_name_map["$route_from"]} ;;
+            3) from_id=${application_process_binary_map["$route_from"]} ;;
+        esac
+
+        case $route_to_type in
+            1) to_id=${node_name_map["$route_to"]} ;;
+            2) to_id=${application_name_map["$route_to"]} ;;
+            3) to_id=${application_process_binary_map["$route_to"]} ;;
+        esac
+
+        if [[ -n "$from_id" && -n "$to_id" ]]; then
+            # Link the nodes
+            echo "Routing $from_id"
+            pw-link $from_id $to_id &> /dev/null &
+        fi
+    done <<< "$routes"
 done
