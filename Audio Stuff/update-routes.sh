@@ -2,7 +2,7 @@
 # Routes audio sources to correct links
 
 routes_location="$(dirname "$0")/routes" # Routes location
-interval=0 # How often to monitor
+interval=1 # How often to monitor
 
 while true; do
     sleep $interval
