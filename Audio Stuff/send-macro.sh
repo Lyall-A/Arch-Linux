@@ -25,9 +25,9 @@ if [ "$found_macro" != "" ]; then
     found_save=$(grep "^$save_name\s" "$macro_saves_location")
 
     # Get value from save, or use default value
-    if [ "$found_save" != "" ]; then current_value=$(echo "$found_save" | awk -F" : " '{print $2}'); else current_value=$default_value; fi
-    if [ "$dont_update" = "" ]; then
-        if [ "$is_toggle" = "true" ]; then
+    if [ -n "$found_save" ]; then current_value=$(echo "$found_save" | awk -F" : " '{print $2}'); else current_value=$default_value; fi
+    if [ -z "$dont_update" ]; then
+        if [ "$is_toggle" = true ]; then
             # Set's value to 0 OR 127
             new_value=$(( current_value > toggle_low ? toggle_low : toggle_high ))
         else
@@ -52,10 +52,10 @@ if [ "$found_macro" != "" ]; then
 
     echo "Changing '$macro_name' (CC$cc, Ch$((channel + 1))) value from $current_value to $new_value"
     # Send to MIDI
-    amidi -p $midi_device -S "$data"
+    amidi -p "$midi_device" -S "$data"
     
     # Write save
-    if [ "$found_save" = "" ]; then
+    if [ -z "$found_save" ]; then
         echo "$updated_save" >> "$macro_saves_location"
     else
         sed -i "s/$found_save/$updated_save/" "$macro_saves_location"

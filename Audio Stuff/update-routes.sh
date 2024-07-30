@@ -55,8 +55,7 @@ while true; do
 
         if [[ -n "$from_id" && -n "$to_id" ]]; then
             # Link the nodes
-            echo "Routing $from_id"
-            pw-link $from_id $to_id &> /dev/null &
+            pw-link "$from_id" "$to_id" &> /dev/null &
         fi
     done <<< "$routes"
 done

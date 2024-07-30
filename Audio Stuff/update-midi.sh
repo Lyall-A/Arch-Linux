@@ -21,7 +21,7 @@ while true; do
         found_save=$(grep "^$save_name\s" "$macro_saves_location")
 
         # Get value from save, or use default value
-        if [ "$found_save" != "" ]; then value=$(echo "$found_save" | awk -F" : " '{print $2}'); else value=$default_value; fi
+        if [ -n "$found_save" ]; then value=$(echo "$found_save" | awk -F" : " '{print $2}'); else value=$default_value; fi
 
         # Update save
         updated_save="$save_name : $value"
@@ -34,10 +34,10 @@ while true; do
         data="$channel_hex $cc_hex $value_hex"
 
         # Send to MIDI
-        amidi -p $midi_device -S "$data"
+        amidi -p "$midi_device" -S "$data"
     
         # Write save
-        if [ "$found_save" = "" ]; then
+        if [ -z "$found_save" ]; then
             echo "$updated_save"
             echo "$updated_save" >> "$macro_saves_location"
         fi
