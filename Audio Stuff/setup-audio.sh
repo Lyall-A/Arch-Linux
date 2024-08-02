@@ -17,7 +17,10 @@ echo "Main sink: $(pactl load-module module-null-sink sink_name=Main)"
 echo "Music sink: $(pactl load-module module-null-sink sink_name=Music)"
 echo "Video sink: $(pactl load-module module-null-sink sink_name=Video)"
 echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"
-pactl set-default-sink Main
+
+echo "Creating virtual inputs..."
+echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1)"
+echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2)"
 sleep 2
 
 # Start Carla (plugin host)

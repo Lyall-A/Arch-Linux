@@ -44,7 +44,7 @@ Brave : Video
 ```
 
 ## Routing
-![Routing in Carla](./carla-example-config.png)
+![Routing in Carla](./carla-patchbay.png)
 I have all my plugins routed using Carla and all external stuff like Spotify, outputs and MIDI routed through qpwgraph to make sure they don't get removed
 
 ## TODO
