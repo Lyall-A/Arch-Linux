@@ -9,7 +9,7 @@ while true; do
     # Dump PipeWire
     dump="$(pw-dump)"
     # Get all nodes
-    nodes=$(echo "$dump" | jq -c '.[] | select(.type == "PipeWire:Interface:Node")')
+    nodes=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") | [ .id, .info.props["node.name"], .info.props["application.name"], .info.props["application.process.binary"] ] | @tsv')
     
     # Read routes
     routes=$(grep -vE "^(\s*|#.*)$" "$routes_location")
@@ -19,15 +19,10 @@ while true; do
     declare -A application_process_binary_map
 
     # Loop through each node
-    while IFS= read -r node; do
-        id=$(echo "$node" | jq -r '.id')
-        node_name=$(echo "$node" | jq -r '.info.props["node.name"]')
-        application_name=$(echo "$node" | jq -r '.info.props["application.name"]')
-        application_process_binary=$(echo "$node" | jq -r '.info.props["application.process.binary"]')
-
-        node_name_map["$node_name"]=$id
-        application_name_map["$application_name"]=$id
-        application_process_binary_map["$application_process_binary"]=$id
+    while IFS=$'\t' read -r id node_name application_name application_process_binary; do
+        if [ -n "$node_name" ]; then node_name_map["$node_name"]=$id; fi
+        if [ -n "$application_name" ]; then application_name_map["$application_name"]=$id; fi
+        if [ -n "$application_process_binary" ]; then application_process_binary_map["$application_process_binary"]=$id; fi
     done <<< "$nodes"
 
     # Loop through each route
