@@ -9,7 +9,7 @@ interval=5 # How often to update
 while true; do
     sleep $interval
     # Loop through each macro
-    grep -vE "^(\s*|#.*)$" "$macros_location" | while read line; do
+    sed -e "s/\s*#.*//" -e "/^\s*$/d" "$macros_location" | while read line; do
         # Get macro details
         macro_name=$(echo "$line" | awk -F" : " '{print $1}')
         save_name=$(echo "$line" | awk -F" : " '{print $2}')
@@ -18,7 +18,7 @@ while true; do
         channel=$(echo "$line" | awk -F" : " '{print $5}')
 
         # Find save
-        found_save=$(grep "^$save_name\s" "$macro_saves_location")
+        found_save=$(grep "^$save_name : " "$macro_saves_location") # if save_name contains regex characters, stuff happens, so dont
 
         # Get value from save, or use default value
         if [ -n "$found_save" ]; then value=$(echo "$found_save" | awk -F" : " '{print $2}'); else value=$default_value; fi

@@ -9,8 +9,8 @@ macros_location="$(dirname "$0")/macros" # Macros location
 macro_saves_location="$(dirname "$0")/macro-saves" # Macro saves location
 
 # Find macro
-found_macro=$(grep "^$macro_name\s" "$macros_location")
-if [ "$found_macro" != "" ]; then
+found_macro=$(grep "^$macro_name : " "$macros_location") # if macro_name contains regex characters, stuff happens, so dont
+if [ -n "$found_macro" ]; then
     # Get macro details
     save_name=$(echo "$found_macro" | awk -F" : " '{print $2}')
     midi_device=$(echo "$found_macro" | awk -F" : " '{print $3}')
@@ -22,7 +22,7 @@ if [ "$found_macro" != "" ]; then
     toggle_high=$(echo "$found_macro" | awk -F" : " '{print $9}') && toggle_high=${toggle_high:-127} && toggle_high=$(( toggle_high > 127 ? 127 : toggle_high < 0 ? 0 : toggle_high ))
 
     # Find save
-    found_save=$(grep "^$save_name\s" "$macro_saves_location")
+    found_save=$(grep "^$save_name : " "$macro_saves_location") # if save_name contains regex characters, stuff happens, so dont
 
     # Get value from save, or use default value
     if [ -n "$found_save" ]; then current_value=$(echo "$found_save" | awk -F" : " '{print $2}'); else current_value=$default_value; fi

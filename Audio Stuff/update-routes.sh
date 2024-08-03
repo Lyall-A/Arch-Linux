@@ -11,7 +11,7 @@ while true; do
     nodes=$(echo "$(pw-dump)" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") | [ .id, .info.props["node.name"], .info.props["application.name"], .info.props["application.process.binary"] ] | @tsv')
     
     # Read routes
-    routes=$(grep -vE "^(\s*|#.*)$" "$routes_location")
+    routes=$(sed -e "s/\s*#.*//" -e "/^\s*$/d" "$routes_location")
 
     declare -A node_name_map
     declare -A application_name_map
