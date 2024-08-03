@@ -1,3 +1,4 @@
 spotify : Music
 Brave : Video
 Output Device 1 MUTE : alsa_output.pci-0000_03_00.6.HiFi__Headphones__sink
+alsa_input.pci-0000_03_00.6.HiFi__Mic1__source : Mic 1 EQ

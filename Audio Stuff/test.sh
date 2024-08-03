@@ -1,10 +1,10 @@
 #!/bin/bash
 # Monitors for new audio sources and changes the route to default sink depending on if it is linked to anything else
 
-interval=1 # How often to monitor
+# interval=1 # How often to monitor
 
-while true; do
-    sleep $interval
+# while true; do
+    # sleep $interval
     
     # Parse PipeWire dump
     dump=$(echo "$(pw-dump)" | jq -r '
@@ -64,4 +64,4 @@ while true; do
             pw-link -d $id $input_source_id &
         fi
     done
-done
+# done

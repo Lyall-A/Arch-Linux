@@ -6,10 +6,9 @@ interval=1 # How often to monitor
 
 while true; do
     sleep $interval
-    # Dump PipeWire
-    dump="$(pw-dump)"
-    # Get all nodes
-    nodes=$(echo "$dump" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") | [ .id, .info.props["node.name"], .info.props["application.name"], .info.props["application.process.binary"] ] | @tsv')
+
+    # Get all nodes from PipeWire dump
+    nodes=$(echo "$(pw-dump)" | jq -r '.[] | select(.type == "PipeWire:Interface:Node") | [ .id, .info.props["node.name"], .info.props["application.name"], .info.props["application.process.binary"] ] | @tsv')
     
     # Read routes
     routes=$(grep -vE "^(\s*|#.*)$" "$routes_location")

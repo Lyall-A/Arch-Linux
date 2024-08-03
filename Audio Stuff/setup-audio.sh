@@ -17,11 +17,12 @@ echo "Main sink: $(pactl load-module module-null-sink sink_name=Main)"
 echo "Music sink: $(pactl load-module module-null-sink sink_name=Music)"
 echo "Video sink: $(pactl load-module module-null-sink sink_name=Video)"
 echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"
+pactl set-default-sink Main
 
 echo "Creating virtual inputs..."
 echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1)"
 echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2)"
-sleep 2
+pactl set-default-source output.Mic1
 
 # Start Carla (plugin host)
 echo "Starting Carla..."
@@ -36,19 +37,15 @@ sleep 2
 # Start audio monitoring script (monitors for new nodes)
 echo "Starting audio monitoring script..."
 ./monitor-audio.sh &> ./monitor-audio.log &
-sleep 2
 
 # Start update routes script (for routing)
 echo "Starting routes update script..."
 ./update-routes.sh &> ./update-routes.log &
-sleep 2
 
 # Start MIDI update script (makes sure MIDI doesn't get changed)
 echo "Starting MIDI update script..."
 ./update-midi.sh &> ./update-midi.log &
-sleep 2
 
 # Start xbindkeys (keyboard bindings for MIDI)
 echo "Starting xbindkeys..."
 xbindkeys --file ./.xbindkeysrc &> ./xbindkeys.log &
-sleep 2
