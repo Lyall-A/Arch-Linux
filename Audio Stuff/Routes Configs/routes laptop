@@ -1,5 +1,12 @@
+# Music
 spotify : Music
+
+# Video
 Brave : Video
+
+# Outputs
 Output Device 1 MUTE : alsa_output.pci-0000_03_00.6.HiFi__Headphones__sink
+
+# Inputs
 #alsa_input.pci-0000_03_00.6.HiFi__Headset__source : Mic 1 EQ
 #alsa_input.pci-0000_03_00.6.HiFi__Mic1__source : Mic 2 EQ
