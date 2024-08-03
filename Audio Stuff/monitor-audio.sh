@@ -1,5 +1,5 @@
 #!/bin/bash
-# Monitors for new audio sources and changes the route to default sink depending on if it is linked to anything else
+# Monitors audio and unlinks nodes from default sink/source
 
 interval=1 # How often to monitor
 
@@ -56,10 +56,11 @@ while true; do
     for id in $source_ids; do
         # Check node links
         linked_to_source=$(echo "$dump" | jq -r --arg id "$id" --arg source_id "$input_source_id" 'any(.links[]; .output_node_id == ($id | tonumber) and .input_node_id == ($source_id | tonumber))')
-        linked_to_other=$(echo "$dump" | jq -r --arg id "$id" --arg source_id "$input_source_id" 'any(.links[]; .output_node_id == ($id | tonumber) and .input_node_id != ($source_id | tonumber))')
+        # linked_to_other=$(echo "$dump" | jq -r --arg id "$id" --arg source_id "$input_source_id" 'any(.links[]; .output_node_id == ($id | tonumber) and .input_node_id != ($source_id | tonumber))')
 
-        # Unlink from default source if linked to anything else
-        if [[ "$linked_to_source" = true && "$linked_to_other" = true ]]; then
+        # Unlink from default source if linked
+        if [ "$linked_to_source" = true ]; then
+        # if [[ "$linked_to_source" = true && "$linked_to_other" = true ]]; then
             echo "Unlinking ID '$id' from default source"
             pw-link -d $id $input_source_id &
         fi
