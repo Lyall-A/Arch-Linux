@@ -13,6 +13,10 @@ while true; do
     # Read routes
     routes=$(sed -e "s/\s*#.*//" -e "/^\s*$/d" "$routes_location")
 
+    unset node_name_map
+    unset application_name_map
+    unset application_process_binary_map
+
     declare -A node_name_map
     declare -A application_name_map
     declare -A application_process_binary_map
