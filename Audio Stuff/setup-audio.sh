@@ -26,7 +26,8 @@ pactl set-default-source output.Mic1
 
 # Start Carla (plugin host)
 echo "Starting Carla..."
-carla --no-gui ./.carxp &> ./Carla.log &
+# carla --no-gui ./.carxp &> ./Carla.log &
+carla ./.carxp &> ./Carla.log &
 sleep 2
 
 # Start qpwgraph (for routing and graph)
