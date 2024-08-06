@@ -3,7 +3,8 @@
 
 Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, virtual MIDI devices and custom bash scripts.
 
-Audio handled like `[INPUT] > EQ (LSP Parametric Equalizer x16 Stereo) > Volume (Audio Gain (Stereo)) > MUTE (Audio Gain (Stereo)) > [OUTPUT]`
+# Carla configuration
+* `[INPUT] > EQ (LSP Parametric Equalizer x16 Stereo) > Volume (Audio Gain (Stereo)) > MUTE (Audio Gain (Stereo)) > [OUTPUT]`
 
 ## Stuff
 * `Carla`: used as a plugin host

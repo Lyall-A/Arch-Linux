@@ -1,19 +1,19 @@
 # Master volume
-master-volume-up : master-volume : hw:0,0 : 1 : 15 : 2
-master-volume-down : master-volume : hw:0,0 : 1 : 15 : -2
+master-volume-up : master-volume : hw:0,0 : 1 : 15 : 1
+master-volume-down : master-volume : hw:0,0 : 1 : 15 : -1
 master-mute : master-mute : hw:0,0 : 4 : 15 : 0 : true
 
 # Main volume
-main-volume-up : main-volume : hw:0,0 : 2 : 15 : 2
-main-volume-down : main-volume : hw:0,0 : 2 : 15 : -2
+main-volume-up : main-volume : hw:0,0 : 2 : 15 : 1
+main-volume-down : main-volume : hw:0,0 : 2 : 15 : -1
 main-mute : main-mute : hw:0,0 : 5 : 15 : 0 : true
 
 # Music volume
-music-volume-up : music-volume : hw:0,0 : 3 : 15 : 2
-music-volume-down : music-volume : hw:0,0 : 3 : 15 : -2
+music-volume-up : music-volume : hw:0,0 : 3 : 15 : 1
+music-volume-down : music-volume : hw:0,0 : 3 : 15 : -1
 music-mute : music-mute : hw:0,0 : 6 : 15 : 0 : true
 
 # Video volume
-video-volume-up : video-volume : hw:0,0 : 7 : 15 : 2
-video-volume-down : video-volume : hw:0,0 : 7 : 15 : -2
+video-volume-up : video-volume : hw:0,0 : 7 : 15 : 1
+video-volume-down : video-volume : hw:0,0 : 7 : 15 : -1
 video-mute : video-mute : hw:0,0 : 8 : 15 : 0 : true
