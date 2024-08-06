@@ -20,8 +20,8 @@ echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"
 pactl set-default-sink Main
 
 echo "Creating virtual inputs..."
-echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1)"
-echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2)"
+echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1 channel_map=mono)"
+echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2 channel_map=mono)"
 pactl set-default-source output.Mic1
 
 # Start Carla (plugin host)
