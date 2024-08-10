@@ -13,15 +13,16 @@ if [ -f "/etc/modules-load.d/modules-load-virtual-midi.conf" ]; then echo "Virtu
 
 # Create virtual sinks and set default
 echo "Creating virtual sinks..."
-echo "Main sink: $(pactl load-module module-null-sink sink_name=Main)"
-echo "Music sink: $(pactl load-module module-null-sink sink_name=Music)"
-echo "Video sink: $(pactl load-module module-null-sink sink_name=Video)"
-echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"
+if [ -z "$(pactl list short modules | grep "sink_name=Main")" ]; then echo "Main sink: $(pactl load-module module-null-sink sink_name=Main)"; fi
+if [ -z "$(pactl list short modules | grep "sink_name=Music")" ]; then echo "Music sink: $(pactl load-module module-null-sink sink_name=Music)"; fi
+if [ -z "$(pactl list short modules | grep "sink_name=Video")" ]; then echo "Video sink: $(pactl load-module module-null-sink sink_name=Video)"; fi
+if [ -z "$(pactl list short modules | grep "sink_name=Output")" ]; then echo "Output sink: $(pactl load-module module-null-sink sink_name=Output)"; fi
 pactl set-default-sink Main
 
+# Create virtual inputs and set default
 echo "Creating virtual inputs..."
-echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1 channel_map=mono)"
-echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2 channel_map=mono)"
+if [ -z "$(pactl list short modules | grep "source_name=Mic1")" ]; then echo "Mic 1: $(pactl load-module module-virtual-source source_name=Mic1 channel_map=mono)"; fi
+if [ -z "$(pactl list short modules | grep "source_name=Mic2")" ]; then echo "Mic 2: $(pactl load-module module-virtual-source source_name=Mic2 channel_map=mono)"; fi
 pactl set-default-source output.Mic1
 
 # Start Carla (plugin host)
