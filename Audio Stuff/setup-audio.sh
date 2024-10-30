@@ -33,10 +33,10 @@ carla ./.carxp &> ./Carla.log &
 sleep 2
 
 # Start qpwgraph (for routing and graph)
-killall qpwgraph
-echo "Starting qpwgraph..."
-qpwgraph --minimized --deactivated --nonexclusive ./.qpwgraph &> ./qpwgraph.log &
-sleep 2
+#killall qpwgraph
+#echo "Starting qpwgraph..."
+#qpwgraph --minimized --deactivated --nonexclusive ./.qpwgraph &> ./qpwgraph.log &
+#sleep 2
 
 # Start audio monitoring script (monitors for new nodes)
 killall monitor-audio.sh
