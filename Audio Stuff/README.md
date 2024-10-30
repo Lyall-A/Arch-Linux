@@ -9,7 +9,7 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 
 ## Stuff
 * `Carla`: used as a plugin host (looking for alternatives/custom version)
-* `qpwgraph`: used as a graph and to automatically or manually route my audio sources (not needed)
+* ~~`qpwgraph`: used as a graph and to automatically or manually route my audio sources~~
 * `monitor-audio.sh`: automatically unlinks audio sources from the default sink if it is also linked to anything else
 * `send-macro.sh`: used to send the virtual MIDI commands, mainly by xbindkeys
 * `update-midi.sh`: used to make sure MIDI is set to the correct value
@@ -21,7 +21,7 @@ Audio setup on Linux using PipeWire, Carla, qpwgraph, xbindkeys, virtual sinks, 
 * `jq` Parse JSON
 * `xbindkeys` Keyboard binds
 * `carla` Plugin host
-* `qpwgraph` PipeWire graph
+* ~~`qpwgraph` PipeWire graph~~
 * `pipewire-jack` `pipewire-pulse` `pipewire-alsa` To make everything work more smoothly
 * `alsa-utils` For MIDI
 * `lsp-plugins` `calf` Plugins for Carla
