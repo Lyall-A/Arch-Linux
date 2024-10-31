@@ -26,34 +26,34 @@ if [ -z "$(pactl list short modules | grep "source_name=Mic2")" ]; then echo "Mi
 pactl set-default-source output.Mic1
 
 # Start Carla (plugin host)
-killall carla
+killall -9 carla
 echo "Starting Carla..."
 # carla --no-gui ./.carxp &> ./Carla.log &
 carla ./.carxp &> ./Carla.log &
 sleep 2
 
 # Start qpwgraph (for routing and graph)
-#killall qpwgraph
+#killall -9 qpwgraph
 #echo "Starting qpwgraph..."
 #qpwgraph --minimized --deactivated --nonexclusive ./.qpwgraph &> ./qpwgraph.log &
 #sleep 2
 
 # Start audio monitoring script (monitors for new nodes)
-killall monitor-audio.sh
+killall -9 monitor-audio.sh
 echo "Starting audio monitoring script..."
 ./monitor-audio.sh &> ./monitor-audio.log &
 
 # Start update routes script (for routing)
-killall update-routes.sh
+killall -9 update-routes.sh
 echo "Starting routes update script..."
 ./update-routes.sh &> ./update-routes.log &
 
 # Start MIDI update script (makes sure MIDI doesn't get changed)
-killall update-midi.sh
+killall -9 update-midi.sh
 echo "Starting MIDI update script..."
 ./update-midi.sh &> ./update-midi.log &
 
 # Start xbindkeys (keyboard bindings for MIDI)
-killall xbindkeys
+killall -9 xbindkeys
 echo "Starting xbindkeys..."
 xbindkeys --file ./.xbindkeysrc &> ./xbindkeys.log &
