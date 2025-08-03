@@ -1,18 +1,15 @@
 # Installing Arch Linux :D :3 UwU
 
 ## Sources
-https://wiki.archlinux.org/title/installation_guide
-
-https://wiki.archlinux.org/title/Iwd#iwctl
-
-https://wiki.archlinux.org/title/GRUB
-
-https://wiki.archlinux.org/title/NVIDIA
-
-https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
+* https://wiki.archlinux.org/title/installation_guide
+* https://wiki.archlinux.org/title/Iwd#iwctl
+* https://wiki.archlinux.org/title/GRUB
+* https://wiki.archlinux.org/title/NVIDIA
+* https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 
 
 ## Set keyboard layout for current console
+This sets the keyboard layout for the setup only
 * `localectl list-keymaps` to view keymaps
 * `loadkeys <layout>` to set keyboard layout temporary (eg: `loadkeys uk`)
 
@@ -22,7 +19,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
     * `32`: 32-bit UEFI mode
     * `No such file or directory`: booted in BIOS or CSM mode
 
-## Connect to internet (can be skipped if using ethernet)
+## Connect to internet (Wi-Fi)
 * `iwctl` if using Wi-Fi
     * `device list` to view devices
     * `device <name> set-property Powered on` or `adapter <adapter> set-property Powered on` if device shows as powered off
@@ -32,6 +29,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `ping google.com` to verify network connection
 
 ## Check system clock
+The time should be synced to UTC after connecting to internet
 * `timedatectl`
 
 ## Partition disks
@@ -69,13 +67,16 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 ## Installation and configuration
 * `pacstrap -K /mnt base linux linux-firmware nano base-devel networkmanager grub efibootmgr` to install packages
     * `xorg`, `xorg-xinit`, `openssh`, `git` and more can also be added
+    * Replace `linux` package with whatever kernel you want to use (eg: `linux-zen`)
+    * If using a different kernel or plan on using DKMS, install the headers for that kernel (eg: `linux-zen-headers`)
+    * If install fails, try `pacman-key --refresh-keys`
 * `genfstab -U /mnt >> /mnt/etc/fstab` to create fstab
 * `arch-chroot /mnt` to root into the new system
 * `ln -sf /usr/share/zoneinfo/<region>/<city> /etc/localtime` to set time zone (eg. `ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime`)
-* `hwclock --systohc` to generate /etc/adjtime
-* `nano /etc/locale.gen` then uncomment `en_US.UTF-8 UTF-8` with anything else
+* `hwclock --systohc` to sync hardware clock to system clock and generate `/etc/adjtime`
+* `nano /etc/locale.gen` then uncomment the UTF-8 locales you want to use
 * `locale-gen` to generate locale
-* `nano /etc/vconsole.conf` and add `KEYMAP=<layout>` to set a keyboard layout permanently
+* `nano /etc/vconsole.conf` and add `KEYMAP=<layout>` to set a console keyboard layout permanently
 * `nano /etc/hostname` and set to what you want
 * `passwd` to set root password
 
@@ -98,14 +99,18 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 
 ## Install NVIDIA drivers
 * `sudo pacman -S nvidia nvidia-utils nvidia-settings` to install NVIDIA drivers
-* `sudo nano /etc/default/grub` and add `nvidia-drm.modeset=1` to `GRUB_CMDLINE_LINUX_DEFAULT`
-* `sudo grub-mkconfig -o /boot/grub/grub.cfg` to update GRUB configuration
-* `sudo nano /etc/mkinitcpio.conf` and add `nvidia nvidia_modeset nvidia_uvm nvidia_drm` to `MODULES` then remove `kms` from `HOOKS` for early loading
-* `sudo mkinitcpio -P` to regenerate initramfs
-* `sudo curl https://raw.githubusercontent.com/Lyall-A/Arch-Linux/main/nvidia.hook --create-dirs -o /etc/pacman.d/hooks/nvidia.hook` to create Pacman hook that will automatically regenerate initramfs when NVIDIA gets updated, edit file if using different NVIDIA drivers
+  * Or `nvidia-open` or `nvidia-open-beta` for open driver
+  * Optionally add `lib32-nvidia-utils` for 32-bit support
+  * Use DKMS package if using other kernels
+  * If not using DKMS package, `mkinitcpio -P` is required after installing and updating
+* `sudo mkinitcpio -P` to regenerate initramfs (if not using DKMS package)
+* `sudo curl https://raw.githubusercontent.com/Lyall-A/Arch-Linux/main/nvidia.hook --create-dirs -o /etc/pacman.d/hooks/nvidia.hook` to create Pacman hook that will automatically regenerate initramfs when NVIDIA gets updated, edit file if using different NVIDIA drivers. Not required if using DKMS package
 
-## Install Plasma
+## Install KDE Plasma
 * `sudo pacman -S plasma kde-applications`
+  * `kde-applications` not required, but at least have:
+    * `konsole`
+    * `dolphin`
 * `systemctl enable sddm`
 
 ## Install Yay
@@ -121,6 +126,7 @@ https://wiki.archlinux.org/title/Kernel_module#Setting_module_options
 * `spicetify-cli` Spicetify (Spotify modified client)
 * `visual-studio-code-bin` VS Code
 * `steam` Steam
+* `vlc` VLC media player
 * `nvm` Node Version Manager
 * `bun-bin` Bun
 * `multimc-bin` MultiMC
